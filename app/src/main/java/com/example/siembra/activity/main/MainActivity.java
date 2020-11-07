@@ -1,10 +1,12 @@
-package com.example.siembra;
+package com.example.siembra.activity.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.siembra.R;
+import com.example.siembra.activity.editor.EditorActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {

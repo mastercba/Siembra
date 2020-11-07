@@ -13,10 +13,10 @@
         android:theme="@style/Theme.Siembra">
 
         <activity
-            android:name=".EditorActivity"
+            android:name=".activity.editor.EditorActivity"
             android:launchMode="singleTask"
             android:theme="@style/EditorTheme"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

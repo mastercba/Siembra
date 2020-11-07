@@ -1,4 +1,6 @@
-package com.example.siembra;
+package com.example.siembra.api;
+
+import com.example.siembra.model.Note;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

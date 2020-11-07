@@ -1,4 +1,4 @@
-package com.example.siembra;
+package com.example.siembra.activity.editor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,18 +10,29 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.siembra.R;
+import com.example.siembra.api.ApiClient;
+import com.example.siembra.api.ApiInterface;
+import com.example.siembra.model.Note;
+import com.thebluealliance.spectrum.SpectrumPalette;
+
 import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EditorActivity extends AppCompatActivity {
+public class EditorActivity extends AppCompatActivity implements EditorView{
 
     EditText et_title, et_note;
     ProgressDialog progressDialog;
+    SpectrumPalette palette;
 
-    ApiInterface apiInterface;
+    //ApiInterface apiInterface;
+
+    EditorPresenter presenter;
+
+    int color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +41,21 @@ public class EditorActivity extends AppCompatActivity {
 
         et_title = findViewById(R.id.title);
         et_note = findViewById(R.id.note);
+        palette = findViewById(R.id.palette);
+
+        palette.setOnColorSelectedListener(
+                clr -> color = clr
+        );
+
+        //      Default Color Setup
+        palette.setSelectedColor(getResources().getColor(R.color.white));
+        color = getResources().getColor(R.color.white);
 
         //      Progress Dialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
+
+        presenter = new EditorPresenter(this);
     }
 
     @Override
@@ -51,14 +73,14 @@ public class EditorActivity extends AppCompatActivity {
                 //Save
                 String title = et_title.getText().toString().trim();
                 String note = et_note.getText().toString().trim();
-                int color = -2184710;
+                int color = this.color;
 
                 if (title.isEmpty()) {
                     et_title.setError("Please enter a title");
                 } else if (note.isEmpty()) {
                     et_note.setError("Please enter a note");
                 } else {
-                    saveNote(title, note, color);
+                    presenter.saveNote(title, note, color);
                 }
                 return true;
             default:
@@ -66,41 +88,28 @@ public class EditorActivity extends AppCompatActivity {
         }
     }
 
-    private void saveNote(final String title, final String note, final int color){
+    @Override
+    public void showProgress() {
         progressDialog.show();
+    }
 
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<Note> call = apiInterface.saveNote(title, note, color);
+    @Override
+    public void hideProgress() {
+        progressDialog.hide();
+    }
 
-        call.enqueue(new Callback<Note>() {
-            @Override
-            public void onResponse(@NotNull Call<Note> call, @NotNull Response<Note> response) {
-                progressDialog.dismiss();
-                if(response.isSuccessful() && response.body() != null){
-                    Boolean success = response.body().getSuccess();
-                    if(success){
-                        Toast.makeText(EditorActivity.this,
-                                response.body().getMessage(),
-                                Toast.LENGTH_SHORT).show();
-                        finish(); //back to main activity
-                    }
-                    else {
-                        Toast.makeText(EditorActivity.this,
-                                response.body().getMessage(),
-                                Toast.LENGTH_SHORT).show();
-                        // if error, still in this act.
-                    }
+    @Override
+    public void onAddSuccess(String message) {
+        Toast.makeText(EditorActivity.this,
+                message,
+                Toast.LENGTH_SHORT).show();
+        finish();  //back to main activity
+    }
 
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<Note> call, @NotNull Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(EditorActivity.this,
-                        t.getLocalizedMessage(),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+    @Override
+    public void onAddError(String message) {
+        Toast.makeText(EditorActivity.this,
+                message,
+                Toast.LENGTH_SHORT).show();
     }
 }

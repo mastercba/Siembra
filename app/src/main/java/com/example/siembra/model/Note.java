@@ -1,4 +1,4 @@
-package com.example.siembra;
+package com.example.siembra.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
