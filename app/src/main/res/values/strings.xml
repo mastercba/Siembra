@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Siembra</string>
+    <string name="enter_note">Enter a note....</string>
+    <string name="save">Save</string>
+    <string name="to_do">to_do</string>
+    <string name="date">04 Noviembre 2020</string>
 </resources>
