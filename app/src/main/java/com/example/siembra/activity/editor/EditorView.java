@@ -6,5 +6,6 @@ public interface EditorView {
     void hideProgress();
     void onAddSuccess(String message);
     void onAddError(String message);
-
+    void onRequestSuccess(String message);
+    void onRequestError(String message);
 }
