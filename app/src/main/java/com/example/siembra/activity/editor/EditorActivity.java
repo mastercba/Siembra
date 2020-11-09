@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 public class EditorActivity extends AppCompatActivity implements EditorView{
 
-    EditText et_title, et_note;
+    EditText et_ban, et_desp, et_resp, et_tag;
     ProgressDialog progressDialog;
     SpectrumPalette palette;
 
@@ -36,7 +36,7 @@ public class EditorActivity extends AppCompatActivity implements EditorView{
     EditorPresenter presenter;
 
     int color, id;
-    String title, note;
+    String ban, desp, resp, tag;
 
     Menu actionMenu;
 
@@ -45,8 +45,11 @@ public class EditorActivity extends AppCompatActivity implements EditorView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
-        et_title = findViewById(R.id.title);
-        et_note = findViewById(R.id.note);
+        et_ban = findViewById(R.id.ban);
+        et_desp = findViewById(R.id.desp);
+        et_resp = findViewById(R.id.resp);
+        et_tag = findViewById(R.id.tag);
+
         palette = findViewById(R.id.palette);
 
         palette.setOnColorSelectedListener(
@@ -55,14 +58,16 @@ public class EditorActivity extends AppCompatActivity implements EditorView{
 
         //      Progress Dialog
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait...");
+        progressDialog.setMessage("Espere...");
 
         presenter = new EditorPresenter(this);
 
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
-        title = intent.getStringExtra("title");
-        note = intent.getStringExtra("note");
+        ban = intent.getStringExtra("ban");
+        desp = intent.getStringExtra("desp");
+        resp = intent.getStringExtra("resp");
+        tag = intent.getStringExtra("tag");
         color = intent.getIntExtra("color", 0);
 
         setDataFromIntentExtra();
@@ -94,19 +99,25 @@ public class EditorActivity extends AppCompatActivity implements EditorView{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        String title = et_title.getText().toString().trim();
-        String note = et_note.getText().toString().trim();
+        String ban = et_ban.getText().toString().trim();
+        String desp = et_desp.getText().toString().trim();
+        String resp = et_resp.getText().toString().trim();
+        String tag = et_tag.getText().toString().trim();
         int color = this.color;
 
         switch (item.getItemId()) {
             case R.id.save:
                 //Save
-                if (title.isEmpty()) {
-                    et_title.setError("Please enter a title");
-                } else if (note.isEmpty()) {
-                    et_note.setError("Please enter a note");
+                if (ban.isEmpty()) {
+                    et_ban.setError("Ingresa #bandeja!");
+                } else if (desp.isEmpty()) {
+                    et_desp.setError("Ingresa Producto!");
+                } else if (resp.isEmpty()) {
+                    et_resp.setError("Ingresa Responasble!");
+                } else if (tag.isEmpty()) {
+                    et_tag.setError("Ingresa #Semilla!");
                 } else {
-                    presenter.saveNote(title, note, color);
+                    presenter.saveNote(ban, desp, resp, tag, color);
                 }
                 return true;
 
@@ -123,14 +134,17 @@ public class EditorActivity extends AppCompatActivity implements EditorView{
             case R.id.update:
                 //Update
 
-                if (title.isEmpty()) {
-                    et_title.setError("Please enter a title");
-                } else if (note.isEmpty()) {
-                    et_note.setError("Please enter a note");
+                if (ban.isEmpty()) {
+                    et_ban.setError("Ingresa #bandeja!");
+                } else if (desp.isEmpty()) {
+                    et_desp.setError("Ingresa Producto!");
+                } else if (resp.isEmpty()) {
+                    et_resp.setError("Ingresa Responasble!");
+                } else if (tag.isEmpty()) {
+                    et_tag.setError("Ingresa #Semilla!");
                 } else {
-                    presenter.updateNote(id, title, note, color);
+                    presenter.updateNote(id, ban, desp, resp, tag, color);
                 }
-
                 return true;
 
             case R.id.delete:
@@ -196,8 +210,10 @@ public class EditorActivity extends AppCompatActivity implements EditorView{
     private void setDataFromIntentExtra() {
 
         if (id != 0) {
-            et_title.setText(title);
-            et_note.setText(note);
+            et_ban.setText(ban);
+            et_desp.setText(desp);
+            et_resp.setText(resp);
+            et_tag.setText(tag);
             palette.setSelectedColor(color);
 
             getSupportActionBar().setTitle("Actualizar Item");
@@ -211,16 +227,22 @@ public class EditorActivity extends AppCompatActivity implements EditorView{
     }
 
     private void editMode() {
-        et_title.setFocusableInTouchMode(true);
-        et_note.setFocusableInTouchMode(true);
+        et_ban.setFocusableInTouchMode(true);
+        et_desp.setFocusableInTouchMode(true);
+        et_resp.setFocusableInTouchMode(true);
+        et_tag.setFocusableInTouchMode(true);
         palette.setEnabled(true);
     }
 
     private void readMode() {
-        et_title.setFocusableInTouchMode(false);
-        et_note.setFocusableInTouchMode(false);
-        et_title.setFocusable(false);
-        et_note.setFocusable(false);
+        et_ban.setFocusableInTouchMode(false);
+        et_desp.setFocusableInTouchMode(false);
+        et_resp.setFocusableInTouchMode(false);
+        et_tag.setFocusableInTouchMode(false);
+        et_ban.setFocusable(false);
+        et_desp.setFocusable(false);
+        et_resp.setFocusable(false);
+        et_tag.setFocusable(false);
         palette.setEnabled(false);
     }
 

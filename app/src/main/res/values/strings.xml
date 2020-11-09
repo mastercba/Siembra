@@ -10,4 +10,9 @@
     <string name="to_do">to_do</string>
     <string name="date">04 Noviembre 2020</string>
 
+    <string name="ban">bandeja</string>
+    <string name="tag">frasco</string>
+    <string name="desc">producto</string>
+    <string name="resp">responsable</string>
+
 </resources>

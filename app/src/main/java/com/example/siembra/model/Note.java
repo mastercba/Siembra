@@ -7,9 +7,13 @@ public class Note {
     @Expose
     @SerializedName("id") private int id;
     @Expose
-    @SerializedName("title") private String title;
+    @SerializedName("ban") private String ban;
     @Expose
-    @SerializedName("note") private String note;
+    @SerializedName("desp") private String desp;
+    @Expose
+    @SerializedName("resp") private String resp;
+    @Expose
+    @SerializedName("tag") private String tag;
     @Expose
     @SerializedName("color") private int color;
     @Expose
@@ -27,21 +31,39 @@ public class Note {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+
+    public String getBan() {
+        return ban;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setBan(String ban) {
+        this.ban = ban;
     }
 
-    public String getNote() {
-        return note;
+    public String getDesp() {
+        return desp;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setDesp(String desp) {
+        this.desp = desp;
     }
+
+    public String getResp() {
+        return resp;
+    }
+
+    public void setResp(String resp) {
+        this.resp = resp;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
 
     public int getColor() {
         return color;

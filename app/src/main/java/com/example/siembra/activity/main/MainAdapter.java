@@ -38,8 +38,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.RecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter holder, int position) {
         Note note = notes.get(position);
-        holder.tv_title.setText(note.getTitle());
-        holder.tv_note.setText(note.getNote());
+        holder.tv_ban.setText(note.getBan());
+        holder.tv_desp.setText(note.getDesp());
+        holder.tv_resp.setText(note.getResp());
+        holder.tv_tag.setText(note.getTag());
         holder.tv_date.setText(note.getDate());
         holder.card_item.setCardBackgroundColor(note.getColor());
     }
@@ -51,15 +53,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.RecyclerViewAd
 
     class RecyclerViewAdapter extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView tv_title, tv_note, tv_date;
+        TextView tv_ban, tv_desp, tv_resp, tv_tag, tv_date;
         CardView card_item;
         ItemClickListener itemClickListener;
 
         RecyclerViewAdapter(@NonNull View itemView, ItemClickListener itemClickListener) {
             super(itemView);
 
-            tv_title   =  itemView.findViewById(R.id.title);
-            tv_note    =  itemView.findViewById(R.id.note);
+            tv_ban     =  itemView.findViewById(R.id.ban);
+            tv_desp    =  itemView.findViewById(R.id.desp);
+            tv_resp    =  itemView.findViewById(R.id.resp);
+            tv_tag     =  itemView.findViewById(R.id.tag);
             tv_date    =  itemView.findViewById(R.id.date);
             card_item  =  itemView.findViewById(R.id.card_item);
 

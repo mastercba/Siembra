@@ -14,8 +14,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("siembraPost.php")
     Call<Note> saveNote(
-            @Field("title") String title,
-            @Field("note") String note,
+            @Field("ban") String ban,
+            @Field("desp") String desp,
+            @Field("resp") String resp,
+            @Field("tag") String tag,
             @Field("color") int color
     );
 
@@ -26,8 +28,10 @@ public interface ApiInterface {
     @POST("siembraUpt.php")
     Call<Note> updateNote(
             @Field("id") int id,
-            @Field("title") String title,
-            @Field("note") String note,
+            @Field("ban") String ban,
+            @Field("desp") String desp,
+            @Field("resp") String resp,
+            @Field("tag") String tag,
             @Field("color") int color
     );
 

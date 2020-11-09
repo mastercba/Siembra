@@ -57,14 +57,18 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
         itemClickListener = ((view, position) -> {
             int id = note.get(position).getId();
-            String title = note.get(position).getTitle();
-            String notes = note.get(position).getNote();
+            String ban = note.get(position).getBan();
+            String desp = note.get(position).getDesp();
+            String resp = note.get(position).getResp();
+            String tag = note.get(position).getTag();
             int color = note.get(position).getColor();
 
             Intent intent = new Intent(this, EditorActivity.class);
             intent.putExtra("id", id);
-            intent.putExtra("title", title);
-            intent.putExtra("note", notes);
+            intent.putExtra("ban", ban);
+            intent.putExtra("desp", desp);
+            intent.putExtra("resp", resp);
+            intent.putExtra("tag", tag);
             intent.putExtra("color", color);
             startActivityForResult(intent, INTENT_EDIT);
 

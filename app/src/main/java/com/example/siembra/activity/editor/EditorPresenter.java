@@ -17,11 +17,11 @@ public class EditorPresenter {
         this.view = view;
     }
 
-    void saveNote(final String title, final String note, final int color) {
+    void saveNote(final String ban, final String desp, final String resp, final String tag, final int color) {
         view.showProgress();
 
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<Note> call = apiInterface.saveNote(title, note, color);
+        Call<Note> call = apiInterface.saveNote(ban, desp, resp, tag, color);
 
         call.enqueue(new Callback<Note>() {
             @Override
@@ -77,12 +77,12 @@ public class EditorPresenter {
         });
     }
 
-    void updateNote(int id, String title, String note, int color){
+    void updateNote(int id, String ban, String desp, String resp, String tag, int color){
 
         view.showProgress();
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
-        Call<Note> call = apiInterface.updateNote(id, title, note, color);
+        Call<Note> call = apiInterface.updateNote(id, ban, desp, resp, tag, color);
         call.enqueue(new Callback<Note>() {
             @Override
             public void onResponse(@NotNull Call<Note> call, @NotNull Response<Note> response) {

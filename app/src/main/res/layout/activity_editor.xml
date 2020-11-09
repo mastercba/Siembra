@@ -14,28 +14,48 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="20dp">
         <EditText
-            android:id="@+id/title"
-            android:hint="to_do"
-            android:textSize="25dp"
+            android:id="@+id/ban"
+            android:hint="#Bandeja"
+            android:textSize="20dp"
             android:inputType="textCapSentences"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             tools:ignore="Autofill"/>
         <EditText
-            android:id="@+id/note"
-            android:layout_below="@id/title"
-            android:hint="@string/enter_note"
-            android:inputType="textMultiLine"
-            android:minLines="6"
-            android:gravity="top|start"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
+            android:id="@+id/tag"
+            android:hint="#Frasco"
+            android:layout_toRightOf="@id/ban"
+            android:textSize="20dp"
+            android:inputType="textCapSentences"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            tools:ignore="Autofill"/>
+
+        <EditText
+            android:id="@+id/desp"
+            android:layout_below="@id/ban"
+            android:hint="Producto"
+            android:textSize="20dp"
+            android:inputType="textCapSentences"
+            android:layout_marginTop="5dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            tools:ignore="Autofill"/>
+
+        <EditText
+            android:id="@+id/resp"
+            android:hint="@string/resp"
+            android:layout_below="@id/tag"
+            android:layout_toRightOf="@id/desp"
+            android:textSize="20dp"
+            android:inputType="textCapSentences"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             tools:ignore="Autofill"/>
 
         <com.thebluealliance.spectrum.SpectrumPalette
             android:id="@+id/palette"
-            android:layout_below="@+id/note"
+            android:layout_below="@+id/desp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
